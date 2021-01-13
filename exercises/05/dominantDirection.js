@@ -1,5 +1,6 @@
+'use strict';
+
 const SCRIPTS = require('./scripts');
-('use strict');
 
 const { log } = console;
 
@@ -13,7 +14,7 @@ function partOf(code, ranges) {
     false
   ); */
   // faster and better readability
-  for (codeRange of ranges) {
+  for (let codeRange of ranges) {
     if (between(code, codeRange)) {
       return true;
     }
@@ -22,7 +23,7 @@ function partOf(code, ranges) {
 }
 
 function getScript(code, scripts) {
-  for (script of scripts) {
+  for (let script of scripts) {
     if (partOf(code, script.ranges)) {
       return script;
     }
