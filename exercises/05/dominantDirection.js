@@ -7,8 +7,13 @@ function between(code, [start, end]) {
   return code >= start && code <= end;
 }
 
-function partOf(code, scriptObj) {
-  for (codeRange of scriptObj.ranges) {
+function partOf(code, ranges) {
+  /* return ranges.reduce(
+    (acc, codeRange) => acc || between(code, codeRange),
+    false
+  ); */
+  // faster and better readability
+  for (codeRange of ranges) {
     if (between(code, codeRange)) {
       return true;
     }
@@ -18,7 +23,7 @@ function partOf(code, scriptObj) {
 
 function getScript(code, scripts) {
   for (script of scripts) {
-    if (partOf(code, script)) {
+    if (partOf(code, script.ranges)) {
       return script;
     }
   }
